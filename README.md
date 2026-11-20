@@ -2,6 +2,8 @@
 
 **Visual Geometry-Grounded Adaptation for Perceptive Behavior Foundation Model**
 
+[Project page and demonstration video](https://sheepice.github.io/GeoBFM/)
+
 GeoBFM adapts a pretrained SONIC whole-body motion tracker for the Unitree G1. A head-mounted RGB camera observes the next tread or foothold while a planner supplies a nominal motion reference. This repository contains the training environments for stairs and cylindrical stepping stones, the visual policy, evaluation code, and a MuJoCo workflow for running exported policies.
 
 ## How the policy works
