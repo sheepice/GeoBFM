@@ -1,0 +1,159 @@
+{
+  "seed": 261101,
+  "planner": "${planner}",
+  "planner_speeds": [
+    0.0,
+    0.6
+  ],
+  "num_envs_per_rank": 8960,
+  "iterations": 4001,
+  "save_interval": 100,
+  "minibatch_env_steps": 2048,
+  "replay_phase_anneal_iterations": 1000,
+  "curriculum_interval": 150,
+  "preservation_coef": 0.0,
+  "terrain_profile": "irregular_v1",
+  "profile_levels": 7,
+  "profile_variants": 4,
+  "episode_length_s": 45.0,
+  "learning_rate": 0.001,
+  "learning_rate_schedule": "adaptive",
+  "posture_revision": {
+    "waist_position_weight": 0.6,
+    "waist_position_std_rad": 0.18,
+    "waist_position_tolerance_rad": 0.03,
+    "arms_position_weight": 0.8,
+    "arms_position_std_rad": 0.18,
+    "arms_position_tolerance_rad": 0.03,
+    "waist_velocity_weight": 0.05,
+    "waist_velocity_std_rad_s": 1.5,
+    "waist_velocity_tolerance_rad_s": 0.15,
+    "arms_velocity_weight": 0.1,
+    "arms_velocity_std_rad_s": 1.5,
+    "arms_velocity_tolerance_rad_s": 0.15,
+    "torso_orientation_weight": 1.2,
+    "torso_orientation_std_deg": 12.0,
+    "torso_orientation_tolerance_deg": 3.0,
+    "pelvis_orientation_weight": 0.2,
+    "pelvis_orientation_std_deg": 15.0,
+    "pelvis_orientation_tolerance_deg": 5.0,
+    "support_height_weight": 0.0,
+    "support_height_std_m": 0.12,
+    "support_height_tolerance_m": 0.08,
+    "support_ankle_height_m": 0.04,
+    "support_contact_std_m": 0.06,
+    "corridor_weight": 0.15,
+    "corridor_std_m": 0.6,
+    "corridor_tolerance_m": 0.2,
+    "corridor_half_width_m": 2.0,
+    "corridor_margin_m": 0.5,
+    "minimum_root_clearance_m": 0.32,
+    "fall_gravity_z": -0.45,
+    "upper_preservation_coef": 0.0,
+    "upper_preservation_std_rad": 0.2
+  },
+  "dagger": null,
+  "foothold": {
+    "clearance_weight": 0.0,
+    "collision_weight": 0.0,
+    "support_weight": 0.0
+  },
+  "expected_world_size": 4,
+  "task_mode": "cylinder_stones_only_v1",
+  "collective_timeout_seconds": 600,
+  "camera": {
+    "width": 112,
+    "height": 112,
+    "fovy": 42.5,
+    "fovx": 42.5,
+    "fov_policy": "explicit_square_pinhole",
+    "environment_input": "RGB only",
+    "parent_body": "robot/torso_link",
+    "pos": [
+      0.0487988662332928,
+      0.01,
+      0.4378029937970051
+    ],
+    "quat": [
+      -0.6579540114168779,
+      -0.2555813112865144,
+      0.2512180088731416,
+      0.6623173138302506
+    ],
+    "mount_source": "InstinctLab/source/instinctlab/instinctlab/tasks/parkour/config/parkour_env_cfg.py:370",
+    "source_world_quat_wxyz": [
+      0.9135367613482678,
+      0.004363309284746571,
+      0.4067366430758002,
+      0.0
+    ],
+    "mount_status": "repository nominal calibration; not a new measurement of this robot"
+  },
+  "visual": {
+    "backend": "theia_native",
+    "theia_revision": "8ce99426c269617346c30112817f0e694e3cde2d",
+    "dtype": "bfloat16",
+    "patch_grid": [
+      7,
+      7
+    ],
+    "frames": 1,
+    "num_heads": 1,
+    "attention_width": 64,
+    "update_interval_steps": 5,
+    "encoder_batch_size": 256,
+    "token_width": 192,
+    "query_groups": [
+      "q_task_cmd",
+      "q_proprio",
+      "q_cls"
+    ]
+  },
+  "geometry_aux": {
+    "version": 1,
+    "coefficient": 0.0,
+    "warmup_updates": 200,
+    "height_scale_m": 1.0,
+    "sample_interval_steps": 5,
+    "sample_worlds": 128,
+    "buffer_capacity": 2048,
+    "batch_size": 128,
+    "loss_interval_minibatches": 4
+  },
+  "flat_repair": {
+    "coefficient": 0.0,
+    "std_rad": 0.2,
+    "samples": 256
+  },
+  "schema_bank": "${schema_bank}",
+  "sonic_checkpoint": "${sonic_checkpoint}",
+  "stones": {
+    "levels": 7,
+    "speed_m_s": 0.6,
+    "minimum_support_fraction": 0.3,
+    "reward_weights": {
+      "alternate": 1.5,
+      "wrong_step": -0.4,
+      "low_support": -0.35,
+      "bridge": -0.6,
+      "same_top": -0.15,
+      "riser_impact": -0.5,
+      "shin_impact": -0.8,
+      "slip": -0.4,
+      "hard_landing": -0.15,
+      "reach": 0.35
+    },
+    "contact_revision": "loaded_top_contacts_v2",
+    "local_coordinates": true
+  },
+  "initialization": "raw_sonic_fresh_visual",
+  "experiment_name": "stones_vibe_native_ppo_sonic_raw_20261117",
+  "stones_comparison": {
+    "version": 1,
+    "method": "vibe_native_ppo",
+    "reference_mode": "all_flat_planner",
+    "shared_initialization": "original SONIC; fresh LoRA, native visual fusion, critic and optimizer; no added command encoder",
+    "budget_note": "4001 updates from zero; final zero-index checkpoint model_4000.pt",
+    "independent_flat_tasks": false
+  }
+}

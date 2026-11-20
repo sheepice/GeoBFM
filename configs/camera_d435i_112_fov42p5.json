@@ -1,0 +1,31 @@
+{
+  "width": 112,
+  "height": 112,
+  "fovy": 42.5,
+  "fovx": 42.5,
+  "parent_body": "robot/torso_link",
+  "pos": [
+    0.0487988662332928,
+    0.01,
+    0.4378029937970051
+  ],
+  "quat": [
+    -0.6579540114168779,
+    -0.2555813112865144,
+    0.2512180088731416,
+    0.6623173138302506
+  ],
+  "quaternion_order": "wxyz",
+  "convention": "opengl",
+  "optical_axes": "+X right, +Y up, -Z forward",
+  "fx": 144.00376110352582,
+  "fy": 144.00376110352582,
+  "cx": 55.5,
+  "cy": 55.5,
+  "image_processing": "project target pixel-center rays through measured color intrinsics and distortion; bilinear sample; no stretch or padding",
+  "version": 1,
+  "model": "Intel RealSense D435i RGB",
+  "environment_input": "RGB only",
+  "projection": "pinhole_square_crop",
+  "mount_calibration": "Shared DA2/InstinctLab nominal mount; not a measured hardware calibration"
+}

@@ -1,0 +1,10 @@
+{
+  "policy_settings": "${REPO}/configs/tasks/teleop.json",
+  "checkpoint": "${teleop_checkpoint}",
+  "revo2_description": "${revo2_description}",
+  "stairs_start_m": 2.0,
+  "object_position_m": [0.35, -0.30, 0.875],
+  "table_center_m": [0.43, -0.47, 0.79],
+  "object_mass_kg": 0.06,
+  "grasp_offset_m": [0.1235, 0.035, 0.0]
+}

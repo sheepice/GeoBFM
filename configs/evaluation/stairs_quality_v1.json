@@ -1,0 +1,22 @@
+{
+  "version": "regular_stairs_quality_v1",
+  "riser_peak_horizontal_n": 20.0,
+  "riser_horizontal_impulse_ns": 0.5,
+  "riser_merge_gap_s": 0.20,
+  "shin_or_foot_pair_force_n": 15.0,
+  "stable_foot_overhang_m": 0.02,
+  "overhang_duration_s": 0.10,
+  "pelvis_abs_yaw_deg": 20.0,
+  "yaw_duration_s": 0.20,
+  "control_dt_s": 0.02,
+  "window": "First action through original terminal control step inclusive",
+  "strict_success": "Original walking completion, no scored riser hit, shin/brace terrain hit, foot-pair hit, sustained same-foot overhang or sustained heading violation",
+  "edge_definition": "Minimum signed sole-corner margin to the loaded tread or lateral boundary, stable support only",
+  "heading_reference": "Straight course forward axis +X in both directions",
+  "suites": ["up_regular", "down_regular"],
+  "heights_cm": [5, 10, 15, 20, 25],
+  "speeds_m_s": [0.25, 0.4, 0.7],
+  "approaches_m": [0, 2],
+  "planner_phases": [0, 5, 10, 15],
+  "seed": 431113
+}

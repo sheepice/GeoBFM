@@ -1,0 +1,69 @@
+{
+  "seed": 42,
+  "terrain_root": "${terrain_root}",
+  "flat_sources": {
+    "lafan": {
+      "path": "${lafan}",
+      "weight": 0.3
+    },
+    "style100": {
+      "path": "${style100}",
+      "weight": 0.2
+    },
+    "sonic": {
+      "path": "${sonic_motions}",
+      "weight": 0.4
+    },
+    "real_pico": {
+      "path": "${real_pico}",
+      "weight": 0.1
+    }
+  },
+  "flat_to_terrain_ratio": 3,
+  "validation_fraction": 0.05,
+  "world_size": 8,
+  "num_envs_per_rank": 512,
+  "max_iterations": 30000,
+  "phase_anneal_iterations": 20000,
+  "save_interval": 500,
+  "control_hz": 50,
+  "flat_window_seconds": 10,
+  "lora_rank": 16,
+  "vision_encoder": "theia-tiny-patch16-224-cddsv",
+  "vision_revision": "8ce99426c269617346c30112817f0e694e3cde2d",
+  "amp_dtype": null,
+  "camera": {
+    "width": 112,
+    "height": 112,
+    "fovy": 42.5,
+    "fovx": 42.5,
+    "parent_body": "robot/torso_link",
+    "pos": [
+      0.0487988662332928,
+      0.01,
+      0.4378029937970051
+    ],
+    "quat": [
+      -0.6579540114168779,
+      -0.2555813112865144,
+      0.2512180088731416,
+      0.6623173138302506
+    ],
+    "quaternion_order": "wxyz",
+    "convention": "opengl",
+    "optical_axes": "+X right, +Y up, -Z forward",
+    "fx": 144.00376110352582,
+    "fy": 144.00376110352582,
+    "cx": 55.5,
+    "cy": 55.5,
+    "image_processing": "project target pixel-center rays through measured color intrinsics and distortion; bilinear sample; no stretch or padding",
+    "version": 1,
+    "model": "Intel RealSense D435i RGB",
+    "environment_input": "RGB only",
+    "projection": "pinhole_square_crop",
+    "mount_calibration": "Shared DA2/InstinctLab nominal mount; not a measured hardware calibration"
+  },
+  "anchor_position_threshold": 0.3,
+  "anchor_orientation_threshold": 0.5,
+  "motion_end_hold_seconds": 1.0
+}

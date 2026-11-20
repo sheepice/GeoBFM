@@ -1,0 +1,229 @@
+{
+  "seed": 261107,
+  "planner": "${planner}",
+  "planner_speeds": [
+    0.0,
+    0.6
+  ],
+  "num_envs_per_rank": 12800,
+  "iterations": 30000,
+  "save_interval": 100,
+  "minibatch_env_steps": 2048,
+  "replay_phase_anneal_iterations": 1000,
+  "curriculum_interval": 150,
+  "preservation_coef": 0.0,
+  "terrain_profile": "irregular_v1",
+  "profile_levels": 7,
+  "profile_variants": 4,
+  "episode_length_s": 45.0,
+  "reference_checkpoint": "${stage1_checkpoint}",
+  "learning_rate": 0.0001,
+  "learning_rate_schedule": "fixed",
+  "posture_revision": {
+    "waist_position_weight": 0.6,
+    "waist_position_std_rad": 0.18,
+    "waist_position_tolerance_rad": 0.03,
+    "arms_position_weight": 0.8,
+    "arms_position_std_rad": 0.18,
+    "arms_position_tolerance_rad": 0.03,
+    "waist_velocity_weight": 0.05,
+    "waist_velocity_std_rad_s": 1.5,
+    "waist_velocity_tolerance_rad_s": 0.15,
+    "arms_velocity_weight": 0.1,
+    "arms_velocity_std_rad_s": 1.5,
+    "arms_velocity_tolerance_rad_s": 0.15,
+    "torso_orientation_weight": 1.2,
+    "torso_orientation_std_deg": 12.0,
+    "torso_orientation_tolerance_deg": 3.0,
+    "pelvis_orientation_weight": 0.2,
+    "pelvis_orientation_std_deg": 15.0,
+    "pelvis_orientation_tolerance_deg": 5.0,
+    "support_height_weight": 0.0,
+    "support_height_std_m": 0.12,
+    "support_height_tolerance_m": 0.08,
+    "support_ankle_height_m": 0.04,
+    "support_contact_std_m": 0.06,
+    "corridor_weight": 0.15,
+    "corridor_std_m": 0.6,
+    "corridor_tolerance_m": 0.2,
+    "corridor_half_width_m": 2.0,
+    "corridor_margin_m": 0.5,
+    "minimum_root_clearance_m": 0.32,
+    "fall_gravity_z": -0.45,
+    "upper_preservation_coef": 0.02,
+    "upper_preservation_std_rad": 0.2
+  },
+  "dagger": null,
+  "foothold": {
+    "clearance_weight": 0.0,
+    "collision_weight": 0.0,
+    "support_weight": 0.0
+  },
+  "expected_world_size": 4,
+  "task_mode": "cylinder_stones_sideaware_flatmix_v3",
+  "collective_timeout_seconds": 600,
+  "camera": {
+    "width": 112,
+    "height": 112,
+    "fovy": 42.5,
+    "fovx": 42.5,
+    "fov_policy": "explicit_square_pinhole",
+    "environment_input": "RGB only",
+    "parent_body": "robot/torso_link",
+    "pos": [
+      0.0487988662332928,
+      0.01,
+      0.4378029937970051
+    ],
+    "quat": [
+      -0.6579540114168779,
+      -0.2555813112865144,
+      0.2512180088731416,
+      0.6623173138302506
+    ],
+    "mount_source": "InstinctLab/source/instinctlab/instinctlab/tasks/parkour/config/parkour_env_cfg.py:370",
+    "source_world_quat_wxyz": [
+      0.9135367613482678,
+      0.004363309284746571,
+      0.4067366430758002,
+      0.0
+    ],
+    "mount_status": "repository nominal calibration; not a new measurement of this robot"
+  },
+  "visual": {
+    "backend": "da2_metric_small",
+    "source": "${da2_source}",
+    "checkpoint": "${da2_checkpoint}",
+    "checkpoint_sha256": "b782898d8a3e8be1f639de33837ed85e9b4b73e40f8f5e5cd99067588d722545",
+    "dtype": "bfloat16",
+    "patch_grid": [
+      8,
+      8
+    ],
+    "frames": 2,
+    "num_heads": 8,
+    "attention_width": 64,
+    "update_interval_steps": 5,
+    "encoder_batch_size": 256
+  },
+  "geometry_aux": {
+    "version": 1,
+    "coefficient": 0.1,
+    "warmup_updates": 200,
+    "height_scale_m": 1.0,
+    "sample_interval_steps": 5,
+    "sample_worlds": 128,
+    "buffer_capacity": 2048,
+    "batch_size": 128,
+    "loss_interval_minibatches": 4
+  },
+  "flat_repair": {
+    "coefficient": 0.3,
+    "std_rad": 0.2,
+    "samples": 256
+  },
+  "schema_bank": "${schema_bank}",
+  "stage1_checkpoint": "${stage1_checkpoint}",
+  "sonic_checkpoint": "${sonic_checkpoint}",
+  "stones": {
+    "levels": 7,
+    "speed_m_s": 0.6,
+    "minimum_support_fraction": 0.3,
+    "reward_weights": {
+      "alternate": 1.5,
+      "wrong_step": -1.0,
+      "low_support": -0.35,
+      "bridge": -0.6,
+      "same_top": -0.15,
+      "riser_impact": -0.5,
+      "shin_impact": -0.8,
+      "slip": -0.4,
+      "hard_landing": -0.15,
+      "reach": 0.35,
+      "crossover": -1.5,
+      "wrong_side_swing": -0.5
+    },
+    "contact_revision": "loaded_top_contacts_v3_pre_reset_finite_snapshot",
+    "side_aware": {
+      "version": 1,
+      "first_foot": "same_side_as_first_pillar",
+      "minimum_stagger_m": 0.06,
+      "lateral_margin_m": 0.07,
+      "crossover_tolerance_m": 0.02,
+      "crossover_failure_steps": 3,
+      "wrong_side_landing_terminates": true
+    },
+    "local_coordinates": true
+  },
+  "initialization": "stage1_nonvisual_fresh_da2",
+  "experiment_name": "da2_stones_original_domain_4gpu_20261109",
+  "flat_training": {
+    "version": 1,
+    "fractions": {
+      "pillar": 0.6,
+      "stand": 0.15,
+      "walk": 0.1,
+      "start_stop": 0.15
+    },
+    "reference_bank": "${REPO}/data/flat_start_stop_20261106/references.npz",
+    "reference_sha256": "061f0e20520b74aafa485923cc7d969870d4e91bf6cf340ea8e68f0551638340",
+    "episode_seconds": 30.0,
+    "pillar_static_fraction": 0.5,
+    "teacher_coefficient": 1.6,
+    "teacher_samples": 256,
+    "teacher": "frozen_sonic_on_student_flat_states",
+    "reset": "zero_velocity_nominal_or_reference_stand"
+  },
+  "appearance_randomization": {
+    "version": 1,
+    "start_update": 3701,
+    "ramp_updates": 300,
+    "nominal_fraction": 0.2,
+    "independent_mat_fraction": 0.5
+  },
+  "lighting_randomization": {
+    "version": 1,
+    "nominal_fraction": 0.2,
+    "color_balance": 0.12,
+    "direction_xy_delta": 0.4,
+    "exposure_scale": [
+      0.65,
+      1.2
+    ],
+    "gamma": [
+      0.75,
+      1.35
+    ]
+  },
+  "layout_randomization": {
+    "version": 1,
+    "layouts_per_variant": 32,
+    "first_center_m": [
+      0.3,
+      0.8
+    ],
+    "target_first_center_m": [
+      0.7,
+      0.8
+    ],
+    "center_distance_m": [
+      0.6,
+      0.8
+    ],
+    "max_distance_spread_m": 0.1,
+    "lateral_offset_m": [
+      0.21,
+      0.285
+    ],
+    "approach_spawn_x_m": [
+      -2.0,
+      0.15
+    ],
+    "start_update": 3701,
+    "ramp_updates": 300,
+    "mat_thickness_m": [
+      0.03,
+      0.04
+    ]
+  }
+}

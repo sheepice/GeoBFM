@@ -1,0 +1,13 @@
+name: Source checks
+on: [push, pull_request]
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python scripts/check_repo.py
+      - run: python tests/test_portable_paths.py
+      - run: python scripts/run.py stairs train --paths configs/paths.example.json --gpus 0,1,2,3 --log-dir runs/example --dry-run

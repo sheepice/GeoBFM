@@ -1,0 +1,30 @@
+{
+  "resources": {
+    "planner": "${ASSET_ROOT}/models/planner_sonic.onnx",
+    "stage1_checkpoint": "${ASSET_ROOT}/checkpoints/stage1/model_14999.pt",
+    "sonic_checkpoint": "${ASSET_ROOT}/models/sonic/last_ported.pt",
+    "vibe_release_grail": "${ASSET_ROOT}/models/Vibe-PerLoco-Grail-ImgFeat-Ext/checkpoint.pt",
+    "grail_mjlab_checkpoint": "${ASSET_ROOT}/checkpoints/grail_mjlab/model_30000.pt",
+    "grail_mjlab_eval_export": "${ASSET_ROOT}/exports/grail_mjlab",
+    "da2_checkpoint": "${ASSET_ROOT}/models/da2/weights.pth",
+    "da2_base_checkpoint": "${ASSET_ROOT}/models/da2_metric_hypersim_base/weights.pth",
+    "da2_large_checkpoint": "${ASSET_ROOT}/models/da2_metric_hypersim_large/weights.pth",
+    "da2_source": "${REPO}/third_party/depth_anything_v2",
+    "bank_4gpu": "${ASSET_ROOT}/data/full_four_gpu",
+    "bank_8gpu": "${ASSET_ROOT}/data/full",
+    "schema_bank": "${ASSET_ROOT}/data/schema/rank_0",
+    "stairs_checkpoint": "${ASSET_ROOT}/checkpoints/stairs/model_3800.pt",
+    "stones_checkpoint": "${ASSET_ROOT}/checkpoints/stones/model_4000.pt",
+    "teleop_encoder": "${ASSET_ROOT}/models/teleop/encoder.pt",
+    "teleop_checkpoint": "${ASSET_ROOT}/checkpoints/teleop/model_4400.pt",
+    "revo2_description": "${ASSET_ROOT}/brainco/revo2_description",
+    "revo2_demo_output": "${ASSET_ROOT}/experiments/revo2_pick_carry",
+    "terrain_root": "${ASSET_ROOT}/data/grail_stairs",
+    "lafan": "${ASSET_ROOT}/motions/lafan",
+    "style100": "${ASSET_ROOT}/motions/style100",
+    "sonic_motions": "${ASSET_ROOT}/motions/sonic",
+    "real_pico": "${ASSET_ROOT}/motions/real_pico"
+  },
+  "path_prefixes": {},
+  "gpu_lock_dir": "${CACHE_ROOT}/gpu-locks"
+}

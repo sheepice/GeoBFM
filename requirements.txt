@@ -1,0 +1,26 @@
+# Install Torch with a CUDA wheel appropriate for the host before this file.
+# Known source stack: mjlab fixes the camera/render behavior used by the checkpoints.
+mjlab==1.4.0
+mujoco==3.8.1
+mujoco-warp==3.8.1
+warp-lang==1.13.0
+transformers==4.57.6
+wandb>=0.22.3,<0.29
+numpy
+scipy
+psutil
+pyyaml
+einops
+joblib
+omegaconf
+onnx
+onnxruntime
+onnxscript>=0.5.4
+tensordict
+tensorboard
+GitPython
+imageio
+imageio-ffmpeg
+opencv-python-headless
+pytest
+setuptools>=77
