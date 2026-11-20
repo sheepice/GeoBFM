@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#182421">
+  <title>GeoBFM | Visual Geometry-Grounded Adaptation</title>
+  <meta name="description" content="GeoBFM adapts a humanoid motion tracker to stairs and stepping stones with monocular RGB. Explore the method, hardware demonstrations and evaluation.">
+  <meta property="og:title" content="GeoBFM | Visual Geometry-Grounded Adaptation">
+  <meta property="og:image" content="https://sheepice.github.io/GeoBFM/assets/hero.webp">
+  <link rel="stylesheet" href="site.css">
+  <script defer src="site.js"></script>
+</head>
+<body>
+<a class="skip" href="#overview">Skip to research</a>
+<header class="top"><div class="wrap top-inner">
+  <a class="brand" href="#top">Geo<span>BFM</span></a>
+  <nav aria-label="Research sections"><a href="#overview">Overview</a><a href="#method">Method</a><a href="#hardware">Hardware</a><a href="#results">Results</a></nav>
+  <a class="code" href="https://github.com/sheepice/GeoBFM">GitHub <img src="assets/lucide/arrow-up-right.svg" alt="" width="17" height="17"></a>
+</div></header>
+<main id="top">
+  <section class="hero" aria-labelledby="title">
+    <img class="hero-image" src="assets/hero.webp" width="1667" height="867" fetchpriority="high" alt="Successive positions of the physical G1 as it crosses outdoor stepping stones.">
+    <div class="wrap hero-content">
+      <h1 id="title">GeoBFM</h1>
+      <p>Visual Geometry-Grounded Adaptation for Perceptive Behavior Foundation Model</p>
+      <a id="watch" class="watch" href="assets/geobfm-demo.mp4"><img src="assets/lucide/play.svg" width="19" height="19" alt="">Watch film <span>1:34</span></a>
+    </div>
+  </section>
+
+  <section id="overview" class="wrap section overview">
+    <div class="editorial"><h2>Overview</h2><div class="body-copy">
+      <p class="lead">A planner can tell a humanoid where to go. A camera shows where its feet can land.</p>
+      <p>GeoBFM gives a pretrained whole-body motion tracker access to local support geometry through monocular RGB. The robot uses this information to adjust its foot placement while continuing to follow a velocity command, a motion reference or an upper-body target.</p>
+    </div></div>
+    <figure>
+      <a class="plate" href="assets/hardware-full.webp"><img src="assets/hardware.webp" width="1450" height="684" alt="Physical G1 crossing stones, dancing upstairs, climbing and descending staircases, tracking a motion and following an operator."><span class="expand" title="Enlarge hardware overview"><img src="assets/lucide/expand.svg" alt="Enlarge figure"></span></a>
+      <figcaption><strong>Perceptive whole-body control.</strong> The G1 crosses stepping stones, dances while climbing stairs and negotiates 12, 15 and 18 cm risers. The same command interface supports motion tracking and live teleoperation.</figcaption>
+    </figure>
+  </section>
+
+  <section id="method" class="band"><div class="wrap section">
+    <div class="editorial"><h2>Method</h2><div class="body-copy">
+      <p class="lead">From camera pixels to contact-aware motion.</p>
+      <p>Frozen Depth Anything V2 encodes two RGB frames. Proprioception and task commands query the resulting patch tokens. Low-rank adapters use this shared representation to modulate the frozen SONIC tracker. During PPO training, an auxiliary head predicts 99 local terrain heights from the same representation.</p>
+    </div></div>
+    <figure>
+      <a class="plate" href="assets/architecture-full.webp"><img loading="lazy" src="assets/architecture.webp" width="1450" height="841" alt="Architecture diagram showing the frozen visual encoder, two attention queries, low-rank SONIC adapters and the training-only height prediction head."><span class="expand" title="Enlarge architecture"><img src="assets/lucide/expand.svg" alt="Enlarge figure"></span></a>
+      <figcaption><strong>GeoBFM architecture.</strong> RGB features condition the motion policy at inference. The simulator supplies terrain-height targets during training.</figcaption>
+    </figure>
+  </div></section>
+
+  <section class="wrap section" id="simulation">
+    <div class="editorial"><h2>Simulation</h2><div class="body-copy"><p class="lead">Four tasks, from stair ascent to carrying a bottle upstairs.</p></div></div>
+    <figure>
+      <a class="plate" href="assets/simulation-full.webp"><img loading="lazy" src="assets/simulation.webp" width="1450" height="570" alt="Time sequences of simulated stair ascent, stepping-stone traversal, dancing upstairs and bottle pickup followed by ascent."><span class="expand" title="Enlarge simulation sequences"><img src="assets/lucide/expand.svg" alt="Enlarge figure"></span></a>
+      <figcaption><strong>Simulated task sequences.</strong> The robot climbs 20 cm risers, traverses 18 stones, follows dance targets and carries a bottle. The rollouts use task-specific checkpoints. Insets in the first two sequences show visual attention.</figcaption>
+    </figure>
+  </section>
+
+  <section id="hardware" class="band"><div class="wrap section">
+    <div class="editorial"><h2>On hardware</h2><div class="body-copy"><p class="lead">Stairs and stepping stones through the robot's own camera.</p></div></div>
+    <figure>
+      <a class="plate" href="assets/outdoors-full.webp"><img loading="lazy" src="assets/outdoors.webp" width="1450" height="415" alt="Outdoor G1 traversals on stones and stairs, with a head-camera inset at each time point."><span class="expand" title="Enlarge outdoor sequences"><img src="assets/lucide/expand.svg" alt="Enlarge figure"></span></a>
+      <figcaption><strong>Outdoor traversal.</strong> Each row progresses from left to right. Insets show the corresponding head-camera views.</figcaption>
+    </figure>
+    <figure class="attention">
+      <a class="plate" href="assets/attention-full.webp"><img loading="lazy" src="assets/attention.webp" width="1450" height="1115" alt="Head-camera footage and attention overlays at three instants each on stairs and stones."><span class="expand" title="Enlarge attention maps"><img src="assets/lucide/expand.svg" alt="Enlarge figure"></span></a>
+      <figcaption><strong>Where the policy attends.</strong> Attention concentrates on the nearest stepping stone and the front edge of the stair tread. Warmer colors indicate higher attention within each frame.</figcaption>
+    </figure>
+  </div></section>
+
+  <section id="results" class="wrap section results">
+    <div class="editorial"><h2>Results</h2><div class="body-copy"><p class="lead">On regular stairs, both adapted policies finish the course. Their contact quality differs.</p><p>Each controller faces the same 120 simulated trials per direction, with six-step staircases, 5&ndash;25 cm risers and 35 cm treads. ViBe-M is the task-matched visual baseline.</p></div></div>
+    <div class="metrics">
+      <div><b>90.0<span>%</span></b><strong>Strict stair ascent</strong><small>108 of 120 trials</small></div>
+      <div><b>80.0<span>%</span></b><strong>Stable stair descent</strong><small>96 of 120 trials</small></div>
+      <div><b>104<span>/104</span></b><strong>Stepping-stone traversal</strong><small>Seven levels, separate stone policy</small></div>
+    </div>
+    <h3>Stair traversal</h3>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Stair comparison table">
+      <table><thead><tr><th rowspan="2" scope="col">Controller</th><th colspan="3" scope="colgroup">Ascent (%)</th><th colspan="2" scope="colgroup">Descent (%)</th></tr>
+      <tr><th scope="col">Strict pass &uarr;</th><th scope="col">Riser hit &darr;</th><th scope="col">Foot overhang &darr;</th><th scope="col">Stable pass &uarr;</th><th scope="col">Riser hit &darr;</th></tr></thead>
+      <tbody><tr><th scope="row">SONIC (released)</th><td>0.0</td><td>100.0</td><td>15.0</td><td>9.2</td><td>95.8</td></tr>
+      <tr><th scope="row">ViBe (released)</th><td>0.0</td><td>100.0</td><td>48.3</td><td>1.7</td><td>83.3</td></tr>
+      <tr><th scope="row">ViBe-M</th><td>46.7</td><td>30.8</td><td>32.5</td><td>64.2</td><td>90.8</td></tr>
+      <tr class="ours"><th scope="row">GeoBFM</th><td>90.0</td><td>0.8</td><td>1.7</td><td>80.0</td><td>80.8</td></tr></tbody></table>
+    </div>
+    <p class="note">Strict ascent requires completion without a qualifying foot&ndash;riser hit, foot&ndash;foot or shin contact, sustained overhang or heading deviation. Stable descent scores riser hits separately. Of GeoBFM's 96 stable descents, 75 include a foot&ndash;riser hit.</p>
+    <details><summary>Stair ascent ablations</summary>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Ablation comparison table"><table><thead><tr><th scope="col">Variant</th><th scope="col">Strict pass (%)</th><th scope="col">Riser hit (%)</th><th scope="col">Foot overhang (%)</th></tr></thead><tbody>
+        <tr class="ours"><th scope="row">GeoBFM</th><td>90.0</td><td>0.8</td><td>1.7</td></tr>
+        <tr><th scope="row">Without geometry loss</th><td>80.0</td><td>2.5</td><td>11.7</td></tr>
+        <tr><th scope="row">Current frame only</th><td>73.3</td><td>9.2</td><td>7.5</td></tr>
+        <tr><th scope="row">Blind adaptation</th><td>0.0</td><td>100.0</td><td>24.2</td></tr>
+        <tr><th scope="row">Fixed queries</th><td>84.2</td><td>5.0</td><td>2.5</td></tr>
+        <tr><th scope="row">Black RGB at test time</th><td>0.0</td><td>100.0</td><td>59.2</td></tr>
+      </tbody></table></div>
+    </details>
+  </section>
+</main>
+<footer><div class="wrap"><a class="brand" href="#top">GeoBFM</a><a href="https://github.com/sheepice/GeoBFM">Source code <img src="assets/lucide/arrow-up-right.svg" width="16" height="16" alt=""></a></div></footer>
+<dialog id="viewer" aria-labelledby="viewer-title"><div class="viewer-bar"><strong id="viewer-title"></strong><div><a id="original" target="_blank" rel="noopener">Full resolution <img src="assets/lucide/arrow-up-right.svg" width="16" height="16" alt=""></a><button id="close" type="button" title="Close" aria-label="Close"><img src="assets/lucide/x.svg" width="23" height="23" alt=""></button></div></div><div id="media"></div></dialog>
+</body></html>
