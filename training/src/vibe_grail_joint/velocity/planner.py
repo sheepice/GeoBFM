@@ -33,6 +33,7 @@ class PlannerPool:
             str(path), sess_options=options, providers=["CPUExecutionProvider"]
         )
         self.speeds = np.asarray(speeds, dtype=np.float32)
+        self.navigation_heading = 0.0
         self.seed = seed
         self.poses = np.repeat(np.repeat(seed_pose[None, None], len(speeds), 0), self.capacity, 1)
         self.valid_end = np.zeros(len(speeds), dtype=int)
@@ -101,7 +102,8 @@ class PlannerPool:
         self.valid_end[stream], self.last_step[stream] = end, step
 
     def _directions(self, stream):
-        forward = np.array([[1, 0, 0]], np.float32)
+        heading = self.navigation_heading
+        forward = np.array([[np.cos(heading), np.sin(heading), 0]], np.float32)
         return forward, forward
 
     def advance(self):

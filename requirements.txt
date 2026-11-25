@@ -19,6 +19,9 @@ onnxscript>=0.5.4
 tensordict
 tensorboard
 GitPython
+websockets>=11
+matplotlib
+Pillow
 imageio
 imageio-ffmpeg
 opencv-python-headless

@@ -6,7 +6,7 @@ from ..common.scenes import cases_and_tiles
 
 def evaluation_env(settings, *, seed, duration, heights, speeds, approaches, irregular=False,
                    record_case=None, limit_cases=None, route='up', diagnostic_geometry=False,
-                   match_height_initialization=False, measure_foot_contact=False):
+                   match_height_initialization=False, measure_foot_contact=False, extra_sensors=(), configure_scene=None):
     import mjlab
     from mjlab.envs import ManagerBasedRlEnv
     from mjlab.rl import RslRlVecEnvWrapper
@@ -53,6 +53,11 @@ def evaluation_env(settings, *, seed, duration, heights, speeds, approaches, irr
     atlas = cfg.scene.terrain.terrain_generator.sub_terrains['paired_stairs']
     atlas.random_tiles = tuple(tiles); atlas.rows = ()
     if record_case is not None: add_review_camera(cfg, tiles[cases[0]['tile']])
+    cfg.scene.sensors = (*cfg.scene.sensors, *extra_sensors)
+    if configure_scene is not None:
+        if record_case is None:
+            raise ValueError("A custom recording scene requires one selected tile")
+        configure_scene(cfg, tiles[cases[0]["tile"]])
     strip_domain(cfg)
     cfg.events.pop('policy_update_counter', None)
     for group in cfg.observations.values():
